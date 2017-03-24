@@ -71,10 +71,11 @@ angular.module('starter.controllers', [])
                 'Authorization': token
             }
         };
-        return $http.get('http://localhost:8100/employees', options)
+        return $http.get('https://9cyvf89py9.execute-api.us-west-2.amazonaws.com/dev/athletes?filter=wgo', options)
         .then(function(results) {
-            console.log(results.data.message);
-            $scope.employees = results.data.employees;
+            var body = results.data;
+            console.log(body.message);
+            $scope.employees = body.athletes;
             return results.data.message;
         });
     }).catch(function(err) {
