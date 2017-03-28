@@ -1,0 +1,9 @@
+<ion-view view-title="Sports">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="sport in sports | orderBy: 'SportCodeID'" href="#/app/athletes/{{sport.SportCodeID}}">
+        {{sport.SportCodeID}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

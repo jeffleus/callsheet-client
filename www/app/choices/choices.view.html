@@ -1,0 +1,9 @@
+<ion-view view-title="Choices">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="choice in choices | orderBy: ['CategoryID', 'Name']" href="#/app/playlists/{{emp.id}}">
+        {{choice.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

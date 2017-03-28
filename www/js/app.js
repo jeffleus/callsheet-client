@@ -58,6 +58,42 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
         }
       }
     })
+    .state('app.sports', {
+      url: '/sports',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/sports/sports.view.html',
+          controller: 'SportsCtrl'
+        }
+      }
+    })
+    .state('app.athletes', {
+      url: '/athletes/{sport}',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/athletes/athletes.view.html',
+          controller: 'AthletesCtrl'
+        }
+      }
+    })
+    .state('app.categories', {
+      url: '/categories',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/categories/categories.view.html',
+          controller: 'CategoriesCtrl'
+        }
+      }
+    })
+    .state('app.choices', {
+      url: '/choices/{catid}',
+      views: {
+        'menuContent': {
+          templateUrl: 'app/choices/choices.view.html',
+          controller: 'ChoicesCtrl'
+        }
+      }
+    })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
