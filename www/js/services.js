@@ -31,7 +31,9 @@ angular.module('starter.services', [])
                 onSuccess: function (result) {
                     //console.log('access token + ' + result.getAccessToken().getJwtToken());
                     /*Use the idToken for Logins Map when Federating User Pools with Cognito Identity or when passing through an Authorization Header to an API Gateway Authorizer*/
-                    console.log('idToken + ' + result.idToken.jwtToken);
+                    console.log('refreshToken + ' + result.getRefreshToken().token);
+                    console.log('accessToken + ' + new Date(result.getAccessToken().getExpiration() * 1000));
+                    console.log('idToken + ' + new Date(result.getIdToken().getExpiration() * 1000));
                     resolve(result.idToken.jwtToken);
                 },
 
@@ -69,18 +71,20 @@ angular.module('starter.services', [])
                         reject(err);
                     }
                     console.log('session validity: ' + session.isValid());
-
-                    // NOTE: getSession must be called to authenticate user before calling getUserAttributes
-                    cognitoUser.getUserAttributes(function(err, attributes) {
-                        if (err) {
-                            // Handle error
-                            console.error('Error encountered during getUserAttributes', err);
-                            reject(err);
-                        } else {
-                            // Do something with attributes
-                            resolve(session.getIdToken().getJwtToken());
-                        }
-                    });
+                    var remainSec = Math.abs(new Date() - new Date(session.getIdToken().getExpiration()*1000));
+                    console.log('session expiration: ' + (remainSec / 1000 / 60));
+                    resolve(session.getIdToken().jwtToken);
+//                    // NOTE: getSession must be called to authenticate user before calling getUserAttributes
+//                    cognitoUser.getUserAttributes(function(err, attributes) {
+//                        if (err) {
+//                            // Handle error
+//                            console.error('Error encountered during getUserAttributes', err);
+//                            reject(err);
+//                        } else {
+//                            // Do something with attributes
+//                            resolve(session.getIdToken().getJwtToken());
+//                        }
+//                    });
 
     //                AWS.config.credentials = new AWS.CognitoIdentityCredentials({
     //                    IdentityPoolId : '...', // your identity pool id here
